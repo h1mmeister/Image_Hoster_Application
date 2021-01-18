@@ -1,5 +1,8 @@
 package ImageHoster.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +17,6 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name = "id")
     private Integer id;
 
@@ -24,38 +26,43 @@ public class Image {
     @Column(columnDefinition = "TEXT")
     private String imageFile;
 
+
     @Column(name = "description")
     private String description;
 
     @Column(name = "date")
     private Date date;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Tag> tags = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Comments> comments = new ArrayList<>();
 
     public Image() {
     }
 
-    public Image(int i, String s, String s1, Date date) {
-        this.id = i;
-        this.title = s;
-        this.imageFile = s1;
+    public Image(int id, String title, String imageFile, Date date) {
+        this.id = id;
+        this.title = title;
+        this.imageFile = imageFile;
         this.date = date;
     }
 
-    public Image(int i, String s, String s1, String s2, Date date) {
-        this.id = i;
-        this.title = s;
-        this.imageFile = s1;
-        this.description = s2;
+    public Image(int id, String title, String imageFile, String description, Date date) {
+        this.id = id;
+        this.title = title;
+        this.imageFile = imageFile;
+        this.description = description;
         this.date = date;
     }
+
 
 
     public Integer getId() {
@@ -113,4 +120,12 @@ public class Image {
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
+
+    public List<Comments> getComments() {
+        return comments;
+    }
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
+    }
+
 }

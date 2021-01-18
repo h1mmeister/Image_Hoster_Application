@@ -24,5 +24,8 @@ public class UserService {
             return null;
         }
     }
+    public Integer checkPassword(User user){
+        return userRepository.checkPassword(user);
+    }
 
 }
