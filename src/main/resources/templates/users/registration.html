@@ -2,13 +2,16 @@
 
 <html xmlns:th="http://thymeleaf.org">
 
+<!-- Adding the fragment site-head in layout.html-->
 <head th:replace="layout :: site-head">
 </head>
 
+<!-- Adding the fragment logged-out in layout.html-->
 <header th:replace="layout :: logged-out"></header>
 
 <h2>Please Register:</h2>
 
+<!-- Get the details of the user to be registered and call the controller method mapped with request pattern '/users/registration' and accepting the request of type POST-->
 <form th:action="@{/users/registration}" th:method="POST" th:object="${User}">
 
     <label for="username">Username:</label>
