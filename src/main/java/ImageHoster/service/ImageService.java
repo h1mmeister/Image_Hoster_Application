@@ -26,8 +26,8 @@ public class ImageService {
 
 
 
-    public Image getImageByTitle(String title) {
-        return imageRepository.getImageByTitle(title);
+    public Image getImageByTitle(String title, int id) {
+        return imageRepository.getImageByTitle(title, id);
     }
 
 
