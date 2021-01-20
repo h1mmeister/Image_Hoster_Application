@@ -7,7 +7,7 @@
 
 <body>
 
-<!-- The logged-out fragment now contains Login as well as Registration-->
+
 <header th:fragment="logged-out" th:remove="tag">
     <header>
         <a href="users/login.html" th:href="@{/users/login}">Login</a>
@@ -15,7 +15,6 @@
     </header>
 </header>
 
-<!-- Define a logged-in fragment-->
 <header th:fragment="logged-in" th:remove="tag">
     <header>
         <b>Logged in as:</b>
@@ -24,6 +23,10 @@
         <form method="post" th:action="@{/users/logout}">
             <input type="submit" value="Logout"/>
         </form>
+
+        <a th:href="@{/images}">
+            <h3>Image Hoster</h3>
+        </a>
     </header>
 </header>
 

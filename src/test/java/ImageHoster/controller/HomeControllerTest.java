@@ -36,3 +36,4 @@ public class HomeControllerTest {
                 .andExpect(content().string(containsString("Image Hoster")));
     }
 }
+
