@@ -40,7 +40,6 @@ public class ImageController {
 
     @RequestMapping("/images/{id}/{title}")
     public String showImage(@PathVariable("id") int id, @PathVariable("title") String title, Model model) {
-        //Image image = imageService.getImageByTitle(title);
         Image image = imageService.getImageByTitle(title,id);
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
@@ -48,10 +47,12 @@ public class ImageController {
         return "images/image";
     }
 
+
     @RequestMapping("/images/upload")
     public String newImage() {
         return "images/upload";
     }
+
 
     @RequestMapping(value = "/images/upload", method = RequestMethod.POST)
     public String createImage(@RequestParam("file") MultipartFile file, @RequestParam("tags") String tags, Image newImage, HttpSession session) throws IOException {
@@ -69,12 +70,9 @@ public class ImageController {
     }
 
 
-
     @RequestMapping(value = "/editImage")
     public String editImage(@RequestParam("imageId") Integer imageId, Model model,HttpSession session) {
-
         Image image = imageService.getImage(imageId);
-
 
         String errorPage = "", result = "";
         User user = (User) session.getAttribute("loggeduser");
@@ -83,7 +81,6 @@ public class ImageController {
         if (imageUserID != loggedUserID){
             errorPage = imageId+"/"+image.getTitle();
             model.addAttribute("editError","Only the owner of the image can edit the image");
-
             return "redirect:/images/"+errorPage+"?"+"editError";
         }
         else {
@@ -92,9 +89,7 @@ public class ImageController {
             model.addAttribute("tags", tags);
         }
 
-
         return "images/edit";
-
     }
 
 
@@ -120,14 +115,13 @@ public class ImageController {
 
         imageService.updateImage(updatedImage);
 
+        //return "redirect:/images/" + updatedImage.getTitle();
         return "redirect:/images/"+imageId+"/"+updatedImage.getTitle();
     }
 
 
-
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
     public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId, HttpSession session,Model model) {
-
         String result = "",errorPage = "";
         Image image = imageService.getImage(imageId);
         User user = (User) session.getAttribute("loggeduser");
@@ -141,20 +135,17 @@ public class ImageController {
         else{
             errorPage = imageId+"/"+image.getTitle();
             model.addAttribute("deleteError","Only the owner of the image can delete the image");
-
             result = "redirect:images/"+errorPage+"?"+"deleteError";
         }
 
-
-        //return "redirect:/images";
         return result;
     }
 
 
-    //This method converts the image to Base64 format
     private String convertUploadedFileToBase64(MultipartFile file) throws IOException {
         return Base64.getEncoder().encodeToString(file.getBytes());
     }
+
 
     private List<Tag> findOrCreateTags(String tagNames) {
         StringTokenizer st = new StringTokenizer(tagNames, ",");
@@ -172,6 +163,7 @@ public class ImageController {
         }
         return tags;
     }
+
 
     private String convertTagsToString(List<Tag> tags) {
         StringBuilder tagString = new StringBuilder();

@@ -12,7 +12,7 @@
     <header th:replace="layout :: logged-in"></header>
     <div class="dtc v-mid w-75 tr">
         <a th:href="@{/editImage(imageId=${image.id})}">Edit</a>
-        <div th:if="${param.editError}" >Only the owner of the image can edit the image</div>
+        <div th:if="${param.editError}">Only the owner of the image can edit the image</div>
         <div><br></div>
         <form th:action="@{/deleteImage(imageId=${image.id})}" th:method="delete">
             <input type="submit" value="Delete"/>

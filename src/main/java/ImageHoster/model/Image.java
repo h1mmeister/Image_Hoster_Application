@@ -9,11 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 
-
 @Entity
 @Table(name = "images")
 public class Image {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,7 +60,6 @@ public class Image {
         this.description = description;
         this.date = date;
     }
-
 
 
     public Integer getId() {
@@ -124,6 +121,7 @@ public class Image {
     public List<Comments> getComments() {
         return comments;
     }
+
     public void setComments(List<Comments> comments) {
         this.comments = comments;
     }
