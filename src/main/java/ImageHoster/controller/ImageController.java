@@ -115,7 +115,6 @@ public class ImageController {
 
         imageService.updateImage(updatedImage);
 
-        //return "redirect:/images/" + updatedImage.getTitle();
         return "redirect:/images/"+imageId+"/"+updatedImage.getTitle();
     }
 

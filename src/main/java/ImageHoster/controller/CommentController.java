@@ -24,6 +24,7 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+
     @RequestMapping(value = "/image/{imageId}/{imageTitle}/comment",method = RequestMethod.POST)
     public String addComments(Model model, @PathVariable("imageId") Integer imageId, @PathVariable("imageTitle") String imageTitle, Comments comments, @RequestParam("comment") String comment, HttpSession session){
         User user = (User) session.getAttribute("loggeduser");

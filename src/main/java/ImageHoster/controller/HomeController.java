@@ -15,6 +15,7 @@ public class HomeController {
     @Autowired
     private ImageService imageService;
 
+
     @RequestMapping("/")
     public String getAllImages(Model model) {
         List<Image> images = imageService.getAllImages();

@@ -18,5 +18,6 @@ public class CommentService {
 
     public void addComments(Comments comments){ commentRepository.addComments(comments);}
 
+
     public List<Comments> retrieveComments(Image image){ return commentRepository.retrieveComments(image);}
 }
